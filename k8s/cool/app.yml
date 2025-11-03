@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: application-pod
+  template:
+    metadata:
+      labels:
+        app: application-pod
+    spec:
+      containers:
+        - name: app-contianer
+          image: armcool004/spring-boot-mysql 
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://dbsvc:3306/db_table"
+            - name: DB_DRIVER_CLASS
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-pod
+                  key: db_driver_class_value
+            - name: DB_HOST_CLASS
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-pod
+                  key: db_service_value
+            - name: DB_SCHEMA_CLASS
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-pod
+                  key: db_schema_value
+            - name: DB_USERNAME         #if not starting and in logs show using SPRING_DATASOURCE_USERNAME then use this name only 
+              valueFrom:
+                secretKeyRef:
+                  name: secret-pod  
+                  key: db_username_value
+            - name: DB_PASSWORD         #if not starting and in logs show using SPRING_DATASOURCE_USERNAME then use this name only
+              valueFrom:
+                secretKeyRef:
+                  name: secret-pod  
+                  key: db_password_value

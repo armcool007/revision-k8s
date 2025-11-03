@@ -1,0 +1,29 @@
+replicas: 1
+minimumMasterNodes: 1
+
+volumeClaimTemplate: null   # disable PVC
+
+esConfig:
+  elasticsearch.yml: |
+    node.store.allow_mmap: false
+
+persistence:
+  enabled: false   # disable persistence
+
+# force ephemeral storage with emptyDir
+nodeSets:
+  - name: default
+    count: 1
+    volumeClaimTemplates: []    # 👈 critical: no PVCs
+    podTemplate:
+      spec:
+        containers:
+          - name: elasticsearch
+            resources:
+              requests:
+                cpu: 50m
+                memory: 512Mi
+              limits:
+                cpu: 200m
+                memory: 1Gi
+

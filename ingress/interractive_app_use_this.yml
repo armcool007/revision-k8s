@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testing
+  labels:
+    app: logger
+spec:
+  containers:
+    - name: container-logger
+      image: ashokit/sb-logger-app
+      ports:
+        - containerPort: 8080

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dbapp-pod
+  template:
+    metadata:
+      labels:
+        app: dbapp-pod
+    spec:
+      volumes:
+        - name: pod-volume
+          persistentVolumeClaim:
+            claimName: pvc-pod
+ 
+      containers:
+        - name: container-dbpod
+          image: mysql
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: pod-volume
+              mountPath: /var/lib/mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD 
+              valueFrom:
+                secretKeyRef:
+                  name: secret-file
+                  key: DB_PASSWORD
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-file
+                  key: DB_SCHEMA_VALUE 
+
+              

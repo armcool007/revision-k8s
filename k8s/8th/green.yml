@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: green-version
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: webpod
+        version: v2
+        color: green
+    spec:
+      containers:
+        - name: green-container
+          image: armcool004/green-test:latest
+          ports:
+            - containerPort: 8080
+

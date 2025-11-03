@@ -1,0 +1,5 @@
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
+# apply this first to access k8s dashboard
+# then change the service to nodeport or loadbalancer
+# to access the UI use <https://public.ip:port_number>, do not use http.

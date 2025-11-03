@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: statefull-set
+spec:
+  serviceName: sateful-svc
+  replicas: 3
+  selector:
+    matchLabels:
+      app: statfull-app
+  template:
+    metadata:
+      labels:
+        app: statfull-app
+    spec:
+      containers:
+        - name: contaienr-app
+          image: armcool004/color_splash_from_cursorai
+          ports:
+            - containerPort: 5000

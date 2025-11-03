@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+  name: repapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      name:
+      labels:
+        app: webapp
+    spec:
+      containers:
+        - name: containerapp
+          image: armcool004/color_splash_from_cursorai
+          ports:
+            - containerPort: 5000
+

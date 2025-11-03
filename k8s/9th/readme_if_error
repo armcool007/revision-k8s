@@ -1,0 +1,1 @@
+if database is not creating and showing error in logs of pod that table "java.sql.SQLSyntaxErrorException: Unknown database 'dbtables'" then you have to create table in database manually.

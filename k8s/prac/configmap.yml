@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-file
+data:
+  DB_DRIVERCLASS_VALUE: "com.mysql.cj.jdbc.Driver"
+  DB_SERVICE_VALUE: "databasesvc"
+  DB_PORT_VALUE: "3306"
+  DB_SCHEMA_VALUE: "dbtables"
+#database-pod nai likha hai agr nai chlega then check it

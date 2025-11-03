@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-pod
+data:
+  db_driver_class_value: "com.mysql.cj.jdbc.Driver"
+  db_service_value: "dbsvc"
+  db_schema_value: "db_table"
+  db_port_value: "3306"
+  database-pod: "db_table"

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: elastic-search-master
+  labels:
+    app: elastic-search-master
+  namespace: efk
+spec:
+  capacity:
+    storage: 500Mi
+  persistentVolumeReclaimPolicy: Retain
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /tmp
+  storageClassName: dev-storage 
+

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-pod
+spec:
+  type: LoadBalancer
+  selector:
+    app: app-pod
+  ports:
+    - port: 80
+      targetPort: 8080
+        #      nodePort: 30171
+
+        #to put the pressure on the nodes
+        #kubectl run -i --tty load-generator --rm --image=alpine --restart=Never -- sh -c "apk add curl && while true; do curl -s http://app-pod > /dev/null & done"
+
